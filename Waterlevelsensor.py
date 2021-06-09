@@ -13,8 +13,15 @@ mcp = MCP.MCP3008(spi, cs)
 
 chan = AnalogIn(mcp, MCP.P0)
 
+pump = digitalio.DigitalInOut(board.D18)
+pump.direction = digitalio.Direction.OUTPUT
+
+
 while True:
-    sensorvalue = chan.value
-    print(sensorvalue)
-    print(chan.voltage)
+    if chan.value < 10000:
+        pump.value = False
+        print(chan.value)
+    else: 
+        pump.value = True
+        print(chan.value)
     sleep(1.5)
