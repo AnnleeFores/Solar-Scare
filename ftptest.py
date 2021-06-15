@@ -13,8 +13,10 @@ ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD)
 # force UTF-8 encoding
 ftp_server.encoding = "utf-8"
 
+#add zipping function here
+
 # Enter File Name with Extension
-filename = "14-06-2021.tar.xz"
+filename = "filename"
 
 # Read file in binary mode
 with open(filename, "rb") as file:
