@@ -8,6 +8,7 @@ from datetime import *
 import subprocess
 import os
 import schedule
+import sys
 
 spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
 
@@ -48,5 +49,10 @@ schedule.every(20).seconds.do(micpi)
 schedule.every().minute.at(":35").do(pumppi)
 
 while True:
-    schedule.run_pending()
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    if current_time == "22:55:01":
+        sys.exit()
+    else:
+        schedule.run_pending()
     sleep(1)
