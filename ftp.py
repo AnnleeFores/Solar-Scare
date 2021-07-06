@@ -1,26 +1,34 @@
-# Import Module
 import ftplib
+from datetime import date
+from datetime import timedelta
+import subprocess
 
-# Fill Required Information
 HOSTNAME = "192.168.225.62"
 USERNAME = "ftpuser"
 PASSWORD = "pi"
 
-# Connect FTP Server
+
 ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD)
 
-# force UTF-8 encoding
 ftp_server.encoding = "utf-8"
 
-# Enter File Name with Extension
-filename = "14-06-2021.tar.xz"
+today = date.today()
+yesterday = today - timedelta(days = 1)
+filename = yesterday.strftime("%d-%m-%Y")
+print(filename)
 
-# Read file in binary mode
-with open(filename, "rb") as file:
-	# Command for Uploading the file "STOR filename"
-	ftp_server.storbinary(f"STOR {filename}", file)
+
+file_to_archive = filename
+output_filename = filename +'.tar.xz'
+
+command = 'tar -czvf '  + str(output_filename)+ ' ' + str(file_to_archive)
+
+subprocess.call(command, shell=True)
+
+
+with open(output_filename, "rb") as file:
+	ftp_server.storbinary(f"STOR {output_filename}", file)
 
 ftp_server.dir()
-# Close the Connection
 ftp_server.quit()
 
