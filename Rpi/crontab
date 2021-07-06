@@ -26,6 +26,10 @@ XDG_RUNTIME_DIR=/run/user/1000
 22 17 * * * python3 ~/propi/main.py > /dev/pts/0
 24 17 * * * /usr/bin/pkill -f 'python.*main.py'
 
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+XDG_RUNTIME_DIR=/run/user/1000
+22 17 * * * python3 ~/propi/ftp.py > /dev/pts/0
+
 
 @reboot /bin/sleep; /usr/bin/printenv > /home/pi/mycronenv.txt 2>&1
 
