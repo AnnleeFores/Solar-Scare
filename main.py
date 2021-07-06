@@ -51,7 +51,7 @@ schedule.every().minute.at(":35").do(pumppi)
 while True:
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
-    if current_time == "22:55:01":
+    if current_time == "01:25:01":
         sys.exit()
     else:
         schedule.run_pending()
