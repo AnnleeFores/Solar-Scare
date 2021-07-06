@@ -32,27 +32,23 @@ def printchan():
 def micpi():
     if chan.value > 10000:
         print('')
+        print('Recording audio')
         subprocess.call('arecord --format=S16_LE --rate=16000 --file-type=wav --duration=10 --use-strftime %d-%m-%Y/%H-%M-%v.wav', shell=True)
         print('')
 
 def pumppi():
     if chan.value > 10000:
         print('')
-        print('Running pump for 5 sec')
+        print('Running pump')
         pump.value = True
         sleep(5)
         pump.value = False
         print('')
 
 schedule.every(5).seconds.do(printchan)
-schedule.every(20).seconds.do(micpi)
+schedule.every(60).seconds.do(micpi)
 schedule.every().minute.at(":35").do(pumppi)
 
 while True:
-    now = datetime.now()
-    current_time = now.strftime("%H:%M:%S")
-    if current_time == "01:25:01":
-        sys.exit()
-    else:
         schedule.run_pending()
-    sleep(1)
+        sleep(1)
