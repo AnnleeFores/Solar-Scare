@@ -11,11 +11,11 @@ print(filename)
 
 
 source = "/run/user/1000/gvfs/ftp:host=127.0.0.1/"+filename+".tar.xz"
-destination = "/home/annlee/Solar-Scare/Server/dest"
+destination = "/home/annlee/solar-scare/server/dest"
 dest = shutil.move(source, destination)
 
-arcfilename ='~/Solar-Scare/Server/dest/'+filename +'.tar.xz'
-extfolder = '~/Solar-Scare/Server/unzipped'
+arcfilename ='~/solar-scare/server/dest/'+filename+'.tar.xz'
+extfolder = '~/solar-scare/server/unzipped'
 
 command = 'tar -xvzf '  + str(arcfilename)+ ' -C ' + str(extfolder)
 
