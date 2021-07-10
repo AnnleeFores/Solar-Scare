@@ -1,7 +1,9 @@
 
 from __future__ import division
 from __future__ import print_function
-import move
+import sys
+sys.path.insert(0, '/home/annlee/solar-scare/server')
+import mainserver
 print()
 print('Loading libs...')
 
@@ -118,7 +120,9 @@ with tf.compat.v1.Session() as sess:
         print()
         print('STARTED! Monitoring...')
         sleep(3)
-        move.movefile()
+        mainserver.unzip()
+        sleep(3)
+        mainserver.movefile()
 
         while MONITOR_STATE:
             time.sleep(0.001)
