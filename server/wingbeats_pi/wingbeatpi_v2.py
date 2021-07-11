@@ -1,15 +1,15 @@
-
 from __future__ import division
 from __future__ import print_function
 import sys
 sys.path.insert(0, '/home/annlee/solar-scare/server')
-import mainserver
+import modifyfile
 print()
 print('Loading libs...')
 
 import os, sys, glob, time, errno
 from shutil import copyfile
 import numpy as np
+
 
 if sys.version_info[0] < 3:
     import Tkinter as tk
@@ -22,6 +22,7 @@ import soundfile as sf
 
 import tensorflow as tf
 from time import sleep
+# import csv 
 
 
 def make_sure_path_exists(path):
@@ -57,17 +58,18 @@ def on_closing():
     root.destroy()
 
 
-model_name = 'basic_cnn_1d.pb'
+model_name = '/home/annlee/solar-scare/server/wingbeats_pi/basic_cnn_1d.pb'
 
 SR = 8000
 input_shape = (5000, 1)
 
-test_list_file = 'test_list'
+test_list_file = '/home/annlee/solar-scare/server/wingbeats_pi/test_list'
 
-path_to_watch = "test"
+path_to_watch = "/home/annlee/solar-scare/server/wingbeats_pi/test"
 
 target_names = ['Ae. aegypti', 'Ae. albopictus', 'An. gambiae', 
 'An. arabiensis', 'C. pipiens', 'C. quinquefasciatus']
+filename = "solarscare.csv"
 
 print()
 print('Loading model...') 
@@ -100,9 +102,6 @@ with tf.compat.v1.Session() as sess:
     def start_monitor():
         global MONITOR_STATE
 
-        # button1.config(state="disabled")
-        # button2.config(state="normal")
-
         root.update_idletasks()
 
         make_sure_path_exists('saved')
@@ -120,9 +119,9 @@ with tf.compat.v1.Session() as sess:
         print()
         print('STARTED! Monitoring...')
         sleep(3)
-        mainserver.unzip()
+        modifyfile.unzip()
         sleep(3)
-        mainserver.movefile()
+        modifyfile.movefile()
 
         while MONITOR_STATE:
             time.sleep(0.001)
@@ -146,6 +145,8 @@ with tf.compat.v1.Session() as sess:
                                     true_class_name = class_test_list[find_name]
     
                             text1.insert(tk.END, '\n' + "Classifying: " + str(true_class_name) + ' - ' + str(added[i]))
+                            print("Classifying: " + str(true_class_name) + ' - ' + str(added[i]))
+                            cate = "Classifying: " + str(true_class_name) + ' - ' + str(added[i])
                             text1.see(tk.END)
                             text1.update_idletasks()
                             
@@ -167,7 +168,12 @@ with tf.compat.v1.Session() as sess:
                                 final_preds = str(target_names[sorted_indices[5 - j]])
                                 current_pred_and_prob = str(j + 1) + ') ' + str(("%.2f" % round(sorted_acc[5 - j], 2))) + ' ' + str(final_preds)
                                 text1.insert(tk.END, '\n' + current_pred_and_prob)
-                            
+                                print(current_pred_and_prob)
+                                # with open(filename, 'w') as csvfile:
+                                #     csvwriter = csv.writer(csvfile)
+                                #     csvwriter.writerow(cate)
+                                #     csvwriter.writerows(current_pred_and_prob)
+   
                             e_t = time.time()
                             
                             total_time_took = str("Time (s): ") + str(("%.3f" % round(e_t - s_t, 3)))
@@ -181,21 +187,6 @@ with tf.compat.v1.Session() as sess:
                             os.system('sudo rm ' + path_to_watch + '/' + added[i])
                 
             before = after
-
-
-    # def stop_monitor():
-    #     global MONITOR_STATE
-
-    #     button2.config(state="disabled")
-    #     button1.config(state="normal")
-
-    #     root.update_idletasks()
-        
-    #     MONITOR_STATE = False
-
-    #     print()
-    #     print('STOPPED! Press start at the window, send samples and watch the results on the screen...')
-
 
     root = tk.Tk()
     root.title("Solar Scare")
@@ -214,13 +205,6 @@ with tf.compat.v1.Session() as sess:
     root.update_idletasks()
 
     start_monitor()
-
-    # btn_text2 = tk.StringVar()
-    # button2 = Button(root, height = 4, width = 20, textvariable = btn_text2, command = stop_monitor) 
-    # btn_text2.set("STOP")
-    # button2.pack()
-    # button2.config(state = "disabled")
-
 
     root.protocol("WM_DELETE_WINDOW", on_closing)
 

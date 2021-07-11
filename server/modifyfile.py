@@ -4,11 +4,13 @@ from datetime import date
 from datetime import timedelta
 import subprocess
 
+
 today = date.today()
 yesterday = today - timedelta(days = 1)
 filename = yesterday.strftime("%d-%m-%Y")
 print(filename)
 
+    
 def unzip():
 
     source = "/run/user/1000/gvfs/ftp:host=127.0.0.1/"+filename+".tar.xz"
@@ -25,6 +27,3 @@ def unzip():
 def movefile():
     command = 'mv ~/solar-scare/server/unzipped/'+filename+'/*.wav ~/solar-scare/server/wingbeats_pi/test'
     subprocess.call(command, shell=True)
-
-
-
