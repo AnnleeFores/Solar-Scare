@@ -9,10 +9,10 @@ Designed to be cost-effective and environmentally friendly, this device offers a
 
 <div style="margin: 50px auto;" align="center">
   <img src="images/mosquitosense-diagram.png" alt="mosquitosense-diagram" width="75%">
-  <p>Mosquitosense - Diagram</p>
+  <p>MosquitoSense - Diagram</p>
 </div>
 
 <div style="margin: 50px auto;" align="center">
   <img src="images/mosquitosense-3drender.png" alt="mosquitosense-3drender" width="75%">
-  <p>Mosquitosense - 3D render</p>
+  <p>MosquitoSense - 3D Render</p>
 </div>
