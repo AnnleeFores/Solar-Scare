@@ -7,12 +7,12 @@ MosquitoSense is an autonomous device that collects wing beat data from mosquito
 Designed to be cost-effective and environmentally friendly, this device offers a practical solution for controlling mosquito populations and reducing the spread of mosquito-borne diseases. It provides valuable insights about mosquito populations in the area, enabling the development of targeted and effective mosquito control strategies.
 
 
-<figure style="text-align: center; margin: 50px 0px;">
+<div style="text-align: center; margin: 50px auto;">
   <img src="images/mosquitosense-diagram.png" alt="mosquitosense-diagram" width="75%">
-  <figcaption>Mosquitosense - Diagram</figcaption>
-</figure>
+  <p>Mosquitosense - Diagram</p>
+</div>
 
-<figure style="text-align: center; margin: 50px 0px;">
+<div style="text-align: center; margin: 50px auto;">
   <img src="images/mosquitosense-3drender.png" alt="mosquitosense-3drender" width="75%">
-  <figcaption>Mosquitosense - 3D render</figcaption>
-</figure>
+  <p>Mosquitosense - 3D render</p>
+</div>
